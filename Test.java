@@ -81,7 +81,7 @@ class Test{
 					readData.addKeyword(b.readLine());
 				}
 				String space = b.readLine();
-				if((space! = null)&&(!space.trim().equals(""))){
+				if((space != null)&&(!space.trim().equals(""))){
 					System.out.println("Error in file format");
 					return null;
 				}
