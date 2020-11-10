@@ -92,7 +92,11 @@ class BST{
 		{
 			return null;
 		}
-		if ( (root.keyword.compareTo(keyword)) < 0 ) 
+		if ( (root.keyword.compareTo(keyword)) == 0 )
+		{
+			return root;
+		} 
+		else if ( (root.keyword.compareTo(keyword)) < 0 ) 
 		{
 			return find(root.l, keyword);
 		}
