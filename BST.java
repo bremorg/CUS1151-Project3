@@ -92,11 +92,14 @@ class BST{
 		{
 			return null;
 		}
-		if ( (root.keyword.compareTo(keyword)) == 0 )
+		
+		int comp = root.keyword.compareToIgnoreCase(keyword);
+		
+		if ( 0 == comp )
 		{
 			return root;
 		} 
-		else if ( (root.keyword.compareTo(keyword)) < 0 ) 
+		else if ( 0 > comp ) 
 		{
 			return find(root.l, keyword);
 		}
