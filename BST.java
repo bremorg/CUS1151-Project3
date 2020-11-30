@@ -148,6 +148,78 @@ class BST{
     	// from the binary search tree.
     	// You may not use lazy deletion and if the keyword is not in the BST, 
     	// the function should do nothing.
+    	
+    	Node previous = null;
+    	Node current = this.root;
+    	
+    	while (current != null && !(current.keyword.equals(keyword))) {
+    		 previous = current;
+    		 int order = keyword.compareTo(current.keyword);
+    		 
+    		 if (order < 0) {
+                 current = current.r;
+             }
+             if (order > 0) {
+                 current = current.l;
+             }
+    	}
+    	
+    	if(current == null) {
+    		System.out.println(keyword + " was not found in the BST.");
+    		return;
+    	}
+    	
+        if (current.r == null && current.l == null) {
+            if (current != this.root) {
+                if (previous.r == current) {
+                    previous.r = null;
+                } 
+                else {
+                    previous.l = null;
+                }
+            }
+            else {
+                this.root = null;
+            }
+        }
+        
+        else if (current.r != null && current.l != null) {
+            Node replacement = findReplacement(current.r);
+            String replacementKeyword = replacement.keyword;
+            current.record = replacement.record;
+            this.delete(replacementKeyword);
+            current.keyword = replacementKeyword;
+        }
+        
+        else {
+            Node child;
+            
+            if (current.l == null) {
+            	child = current.r;
+            }
+            else {
+            	child = current.l;
+            }
+            
+            if (current != this.root)
+            {
+                if (current == previous.r) {
+                    previous.r = child;
+                } else {
+                    previous.l = child;
+                }
+            }
+            else {
+                this.root = child;
+            }
+        }
+    }
+    
+    public static Node findReplacement (Node c){
+        while (c.l != null) {
+            c = c.l;
+        }
+        return c;
     }
 
     public void print(){
