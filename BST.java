@@ -1,12 +1,4 @@
-import java.util.LinkedList;
 
-//import lab.Node;
-//import lab.Tree;
-
-/**
- * @author
- *
- */
 class BST{
     
     Node root;
@@ -18,12 +10,19 @@ class BST{
         int size;
         Node l;
         Node r;
-
+	/**
+ 	* Instantialize a new Node with keyword k.
+	* @author Brendan Morgenstern
+ 	* @param k The Node's keyword
+ 	*/
         private Node(String k){
-        	// TODO Instantialize a new Node with keyword k.
         	this.keyword = k;
         }
-
+	/**
+ 	* Adds the Record r to the linked list of records.
+	* @author Brendan Morgenstern
+ 	* @param r The record to add
+ 	*/
         private void update(Record r){
         	
         	if(null == this.record) 
@@ -38,9 +37,6 @@ class BST{
         	}
         	curr.next = r;
         	this.size++;
-        	//TODO Adds the Record r to the linked list of records. 
-        	// You do not have to check if the record is already in the list.
-        	//HINT: Add the Record r to the front of your linked list.
         }
     }
 
@@ -53,7 +49,13 @@ class BST{
     	this.root = node;
     }
     
-    private static void newNode(BST bst, Node n) 
+   	/**
+    	* Adds a given node to a given BST
+    	* @author Brendan Morgenstern
+    	* @param bst The BST to add to
+    	* @param n The Node to add     
+	*/
+	private static void newNode(BST bst, Node n) 
 	{
 		if (null == bst.root) 
 		{
@@ -76,16 +78,32 @@ class BST{
 		}
 		
 	}
+   	/**
+    	* Adds a given node to the current BST
+    	* @author Brendan Morgenstern
+    	* @param node The Node to add     
+	*/
 	public void newNode(Node node) 
 	{
 		newNode(this, node);
 	}
-    
+       	/**
+    	* Finds the node in the current BST with the given keyword
+    	* @author Brendan Morgenstern
+    	* @param keyword The keyword to search for
+	* @return Returns the node if a match is found, null if not.
+	*/
 	private Node find(String keyword) 
 	{
 		return find(this.root, keyword);
 	}
-	
+       	/**
+    	* Finds the node in the current BST with the given keyword
+    	* @author Brendan Morgenstern
+	* @param root The root of the tree to search
+    	* @param keyword The keyword to search for
+	* @return Returns the node if a match is found, null if not.
+	*/
 	private Node find(Node root, String keyword) 
 	{
 		if(null == root) 
@@ -109,39 +127,48 @@ class BST{
 		}
 	}
 	
-    public void insert(String keyword, FileData fd) {
-        Record recordToAdd = new Record(fd.id, fd.title, fd.author, null);
-        //TODO Write a recursive insertion that adds recordToAdd 
-        Node nodearg = find(keyword);
-        if(null == nodearg) 
-        {
-        	nodearg = new Node(keyword);
-        	this.newNode( nodearg );
-        }
+	/**
+    	* Adds a new Record based off given FileData to the given Node
+    	* @author Brendan Morgenstern
+	* @param fd The FileData to create a new Record off of
+    	* @param keyword The keyword to associate the record with
+	*/
+    	public void insert(String keyword, FileData fd) 
+	{
+        	Record recordToAdd = new Record(fd.id, fd.title, fd.author, null);
+        	Node nodearg = find(keyword);
+        	if(null == nodearg) 
+        	{
+        		nodearg = new Node(keyword);
+        		this.newNode( nodearg );
+        	}
         
-        nodearg.update(recordToAdd);
-        
-        // to the list of records for the node associated with keyword.
-        // If there is no node, this code should add the node.
-    }
-	
-    public boolean contains(String keyword){
-    	return ( null == this.find(keyword) );
-    	//TODO Write a recursive function which returns true 
-    	// if a particular keyword exists in the BST
-    }
-
-	public Record get_records(String keyword){
+        	nodearg.update(recordToAdd);
+	}
+       	/**
+    	* Checks if there is a node in the current BST with the given keyword
+    	* @author Brendan Morgenstern
+    	* @param keyword The keyword to search for
+	* @return Returns true node if a match is found, false if not.
+	*/	
+	public boolean contains(String keyword){
+		return ( null == this.find(keyword) );
+	}
+       	/**
+    	* Finds the first record for a particular keyword. 
+    	* @author Brendan Morgenstern
+    	* @param keyword The keyword to search for
+	* @return Returns the record if a match is found, null if not.
+	*/
+	public Record get_records(String keyword)
+	{
 		Node n = this.find(keyword);
 		if( n == null) 
 		{
 			return null;
 		}
 		return n.record;
-        //TODO Returns the first record for a particular keyword. 
-    	// This record will link to other records
-    	// If the keyword is not in the BST, it should return null.
-    }
+	}
 
     public void delete(String keyword){
     	//TODO Write a recursive function which removes the Node with keyword 
