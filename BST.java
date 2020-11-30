@@ -169,12 +169,13 @@ class BST{
 		}
 		return n.record;
 	}
-
+	
+	/**
+ 	* Removes the Node with the specified keyword (if it exists).
+	* @author Ice Lin
+ 	* @param keyword The keyword of the Node to be deleted
+ 	*/
     public void delete(String keyword){
-    	//TODO Write a recursive function which removes the Node with keyword 
-    	// from the binary search tree.
-    	// You may not use lazy deletion and if the keyword is not in the BST, 
-    	// the function should do nothing.
     	
     	Node previous = null;
     	Node current = this.root;
@@ -241,7 +242,12 @@ class BST{
             }
         }
     }
-    
+    /**
+    * Helper method to find a suitable replacement Node to maintain BST property during a deletion.
+    * @author Ice Lin
+    * @param The Node to be deleted
+    * @return The Node that will replace the deleted Node
+    */
     public static Node findReplacement (Node c){
         while (c.l != null) {
             c = c.l;
